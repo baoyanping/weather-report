@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.mapper.RiskMapper">
+    <insert id="addRisk" parameterType="com.system.po.Risk">
+        insert into risk (highrisk,lowrisk)
+        values (#{highrisk},#{lowrisk})
+    </insert>
+    <update id="updateRisk">
+        update risk
+        <set>
+            <if test="highrisk != null">highrisk=#{highrisk},</if>
+            <if test="lowrisk != null">lowrisk=#{lowrisk},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delRiskByid" parameterType="int">
+        delete from risk where id =#{id}
+    </delete>
+
+    <select id="queryAllRisk" resultType="com.system.po.Risk">
+        select * from risk
+    </select>
+
+    <select id="queryRiskById" resultType="com.system.po.Risk">
+        select * from risk where id=#{id}
+    </select>
+
+
+</mapper>

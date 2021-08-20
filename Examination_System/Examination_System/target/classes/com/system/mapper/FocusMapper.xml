@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.mapper.FocusMapper">
+    <insert id="addFocus" parameterType="com.system.po.Focus">
+        insert into focus (title,content,publishdate,publishtime,publishman) values
+            (#{title},#{content},#{publishdate},#{publishtime},#{publishman})
+
+    </insert>
+    <update id="updateFocus" parameterType="com.system.po.Focus">
+        UPDATE  focus
+        /**/
+        <trim suffix="where id=#{id}" suffixOverrides=",">
+            <set>
+                <if test="content!=null">content=#{content},</if>
+                <if test="title!=null">title=#{title},</if>
+                <if test="publishdate!=null">publishdate=#{publishdate},</if>
+                <if test="publishtime!=null">publishtime=#{publishtime},</if>
+                <if test="publishman!=null">publishman=#{publishman},</if>
+
+            </set>
+        </trim>
+    </update>
+<!--    <update id="updateFocus">-->
+<!--        update focus-->
+<!--        set title = #{title},content = '#{content}',publishdate = '#{publishdate}',publishtime = '#{publishtime}',publishman = '#{publishman}'-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+
+    <delete id="delFocusById" parameterType="int">
+        delete from focus where id =#{id}
+    </delete>
+
+    <select id="queryAllFocus" resultType="com.system.po.Focus">
+        select * from focus
+    </select>
+    <select id="queryFocusById" resultType="com.system.po.Focus">
+        select * from focus
+        where id = #{id}
+    </select>
+    <select id="queryFocusByloadfrom" resultType="com.system.po.Focus">
+        select * from focus
+    where load_from =#{load_from}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.mapper.HotsMapper">
+    <insert id="addHots" parameterType="com.system.po.Hots">
+        insert into hot (title,content,publishdate,publishtime,publishman) values
+            (#{title},#{content},#{publishdate},#{publishtime},#{publishman})
+
+    </insert>
+    <update id="updateHots" parameterType="com.system.po.Hots">
+        UPDATE  hot
+        /**/
+        <trim suffix="where id=#{id}" suffixOverrides=",">
+            <set>
+                <if test="content!=null">content=#{content},</if>
+                <if test="title!=null">title=#{title},</if>
+                <if test="publishdate!=null">publishdate=#{publishdate},</if>
+                <if test="publishtime!=null">publishtime=#{publishtime},</if>
+                <if test="publishman!=null">publishman=#{publishman},</if>
+
+            </set>
+        </trim>
+    </update>
+<!--    <update id="updateFocus">-->
+<!--        update focus-->
+<!--        set title = #{title},content = '#{content}',publishdate = '#{publishdate}',publishtime = '#{publishtime}',publishman = '#{publishman}'-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+
+    <delete id="delHotsById" parameterType="int">
+        delete from hot where id =#{id}
+    </delete>
+
+    <select id="queryAllHots" resultType="com.system.po.Hots">
+        select * from hot
+    </select>
+    <select id="queryHotsById" resultType="com.system.po.Hots">
+        select * from hot
+        where id = #{id}
+    </select>
+
+
+</mapper>

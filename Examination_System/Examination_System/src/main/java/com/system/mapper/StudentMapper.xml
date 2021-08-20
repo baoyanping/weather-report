@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapper.StudentMapper" >
+
+
+  <insert id="addStudent" parameterType="com.system.po.Student">
+    insert into userlogin (userName,password,role)
+    values (#{userName},#{password},#{role})
+  </insert>
+  <update id="updateStudent">
+    update userlogin
+    <set>
+      <if test="userName != null">userName=#{userName},</if>
+      <if test="password != null">password=#{password},</if>
+      <if test="role != null">role=#{role},</if>
+    </set>
+    where userID=#{userID}
+  </update>
+  <delete id="delStudentById">
+    delete from userlogin where userID =#{userID}
+  </delete>
+  <select id="queryStudentById" resultType="com.system.po.Student">
+    select * from userlogin where userID=#{userID}
+  </select>
+  <select id="queryAllStudent" resultType="com.system.po.Student">
+    select * from userlogin
+  </select>
+
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.mapper.LoadMapper">
+    <insert id="addLoad" parameterType="com.system.po.Load">
+        insert into `a-weather-system`.`load` (load_title,load_content,load_publishdate,load_publishtime,load_from,load_image)
+        values (#{load_title},#{load_content},#{load_publishdate},#{load_publishtime},#{load_from},#{load_image})
+    </insert>
+    <update id="updateLoad">
+        update `a-weather-system`.`load`
+        <set>
+            <if test="load_content != null">load_content=#{load_content},</if>
+            <if test="load_title != null">load_title=#{load_title},</if>
+            <if test="load_content != null">load_content=#{load_content},</if>
+            <if test="load_publishdate != null">load_publishdate=#{load_publishdate},</if>
+            <if test="load_publishtime != null">load_publishtime=#{load_publishtime},</if>
+            <if test="load_from != null">load_from=#{load_from},</if>
+            <if test="load_image != null">load_image=#{load_image},</if>
+        </set>
+        where load_id=#{load_id}
+    </update>
+
+    <delete id="delLoadById" parameterType="int">
+        delete from `a-weather-system`.`load` where load_id =#{load_id}
+    </delete>
+
+    <select id="queryAllLoad" resultType="com.system.po.Load">
+        select * from `a-weather-system`.`load` order by load_id desc
+    </select>
+
+    <select id="queryLoadById" resultType="com.system.po.Load">
+        select * from `a-weather-system`.`load` where load_id=#{load_id}
+    </select>
+
+
+</mapper>
